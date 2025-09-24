@@ -54,7 +54,7 @@ def tensorToImage(tensor):
     :param tensor_image (torch.Tensor): output tensor of the generator, an image normalized between -1 and 1
     :return: image in numpy array format, normlized between integer values 0 and 255 
     """
-    tensor = tensor * 0.5 + 0.5
+    tensor = (tensor + 1) / 2
     image = tensor.squeeze().detach().cpu().numpy()
     image = np.transpose(image, (1, 2, 0))
     image = (image * 255).astype(np.uint8)
@@ -69,15 +69,11 @@ def imageToTensor(image):
     :param image: image to convert to a tensor
     :return: tensor_image (torch.Tensor) normalized between -1 and 1
     """
-    transformer = transforms.Compose([
-        transforms.ToTensor(),
-        transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
-    ])
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    image = Image.fromarray(image)
-    image = transformer(image)
+    tensor = torch.from_numpy(image).permute(2, 0, 1).float() / 255.0
+    tensor = (tensor - 0.5) / 0.5
     
-    return image
+    return tensor
 
     
 def plotLoss(log_dir, train_losses=None, validation_losses=None, img_name="img"):
