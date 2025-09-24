@@ -5,10 +5,6 @@ Created on Mon Jan 13 15:17:52 2025
 @author: fandos
 """
 
-import torch
-import torch.nn as nn
-
-
 def weights_init(m):
     
     classname = m.__class__.__name__
