@@ -10,9 +10,10 @@ import torch
 import numpy as np
 import configargparse
 from loss import GeneratorLoss, DiscriminatorLossWGANGP
-from dataset import Dataset
+from dataset_augmented import Dataset
 from model import DeblurGAN, Discriminator
 from utils import selectDevice, calculateAccuracy#, plotLoss, plotAccuracy
+from torch.utils.data import DataLoader
 
 
 def updateLearningRate(arguments, old_lr):
@@ -78,6 +79,8 @@ def train():
             ###########################################
             """
             image_fake = generator(image_blurred).detach()
+            train_acc_d_temp = 0
+            train_loss_d_temp = 0
             for _ in range(5):
                 
                 optimizer_d.zero_grad()
@@ -86,14 +89,16 @@ def train():
                 fake_logits = discriminator(image_fake)
                 loss_d = discriminator_loss(discriminator, real_logits, fake_logits, image_real, image_fake)
     
-                loss_d.backward() # retain_graph=True
+                loss_d.backward()
                 optimizer_d.step()
                 
                 real_accuracy = calculateAccuracy(real_logits, torch.ones_like(real_logits))
                 fake_accuracy = calculateAccuracy(fake_logits, torch.zeros_like(fake_logits))
-                train_acc_d += (real_accuracy + fake_accuracy).item() / 2
-                train_loss_d += loss_d.item()
-            
+                train_acc_d_temp += (real_accuracy + fake_accuracy).item() / 2
+                train_loss_d_temp += loss_d.item()
+                
+            train_acc_d += (train_accs_d / 5.0)
+            train_loss_d += (train_loss_d_temp / 5.0)
             
             """
             ###########################################
@@ -146,7 +151,6 @@ def train():
                 fake_accuracy = calculateAccuracy(fake_logits, torch.zeros_like(fake_logits))
                 val_acc_d += (real_accuracy + fake_accuracy).item() / 2
                 
-                
                 """
                 ###########################################
                 #                Generator                #
@@ -195,7 +199,7 @@ def train():
             min_val_loss_g = val_loss_g / len(validate_loader)
             bestEpoch_g = i
             
-        # Save the best discriminator model when loss decreases respect to the previous best loss
+        # Save the best discriminator model when accuracy increases respect to the previous best accuracy
         if (val_acc_d / len(validate_loader)) > max_val_acc_d:
             # If first epoch, save model as best, otherwise, replace the previous best model with the current one
             if i == 1:
@@ -223,11 +227,11 @@ if __name__ == "__main__":
     
     # Select parameters for training
     arg = configargparse.ArgumentParser()
-    arg.add_argument('--dataset_file_path', type=str, default='images_paths.json', help='Dataset path.')
-    arg.add_argument('--train_split', type=float, default=0.85, help='Percentage of the dataset to use for training.')
-    arg.add_argument('--log_dir', type=str, default='deblurGAN', help='Name of the folder to save the model.')
+    arg.add_argument('--json_file_train_path', type=str, default='train_paths_augmented.json', help='Train dataset file path.')
+    arg.add_argument('--json_file_val_path', type=str, default='val_paths_augmented.json', help='Validation dataset file path.')
+    arg.add_argument('--log_dir', type=str, default='deblurGAN_augmented_2', help='Name of the folder to save the model.')
     arg.add_argument('--batch_size', type=int, default=1, help='Batch size.')
-    arg.add_argument('--num_workers', type=int, default=4, help='Number of threads to use in order to load the dataset.')
+    arg.add_argument('--num_workers', type=int, default=6, help='Number of threads to use in order to load the dataset.')
     arg.add_argument('--num_resblocks', type=int, default=9, help='Number of residual blocks for the generator.')
     arg.add_argument('--learning_rate', type=float, default=1e-4, help='Learning rate.')
     arg.add_argument('--num_iters', type=int, default=150, help='Number of epochs with the same learning rate.')
@@ -236,8 +240,6 @@ if __name__ == "__main__":
     arg.add_argument('--lambda_discriminator', type=float, default=10, help='Weighting parameter for the gradient penalty in the discriminator loss.')
     arg.add_argument('--GPU', type=bool, default=True, help='True to run the model in the GPU.')
     args = arg.parse_args()
-    
-    assert (args.train_split < 1), 'The percentage of the dataset to use for training must be lower than 1'
     
     log_dir_path = args.log_dir + "_bs" + str(args.batch_size) + "_lr" + str(args.learning_rate) + "_numresblocks" + str(args.num_resblocks)
     assert not (os.path.isdir(log_dir_path)), 'The folder log_dir already exists, remove it or change its name'
@@ -251,8 +253,15 @@ if __name__ == "__main__":
     device = selectDevice(args)
             
     # Load dataset and dataloaders
-    dataset = Dataset(args, device)
-    train_loader, validate_loader = dataset.loadDataloaders()
+    train_dataset = Dataset(args, train=True)
+    validate_dataset = Dataset(args, train=False)
+    
+    train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers)
+    validate_loader = DataLoader(validate_dataset, batch_size=args.batch_size, shuffle=False, num_workers=args.num_workers)
+    
+    total_images = len(train_dataset) + len(validate_dataset)
+    print('Training images: ' + str(len(train_dataset)) + '/' + str(total_images))
+    print('Validation images: ' + str(len(validate_dataset)) + '/' + str(total_images) + '\n')
     
     # Create models
     generator = DeblurGAN(n_resblocks=args.num_resblocks).to(device)
