@@ -79,8 +79,8 @@ def train():
             ###########################################
             """
             image_fake = generator(image_blurred).detach()
-            train_acc_d_temp = 0
-            train_loss_d_temp = 0
+            train_acc_d_temp = 0.0
+            train_loss_d_temp = 0.0
             for _ in range(5):
                 
                 optimizer_d.zero_grad()
@@ -277,3 +277,4 @@ if __name__ == "__main__":
     
     # Train the model
     train()
+
