@@ -85,19 +85,3 @@ class DiscriminatorLossWGANGP(nn.Module):
         gradient_penalty = self.calc_gradient_penalty(discriminator, real_images, fake_images)
 
         return loss + self.LAMBDA * gradient_penalty
-    
-    
-class TVLoss(nn.Module):
-    
-    def __init__(self):
-        
-        super(TVLoss, self).__init__()
-
-    def forward(self, image_generated):
-        
-        horizontal_diff = torch.abs(image_generated[:, :, 1:, :] - image_generated[:, :, :-1, :])
-        vertical_diff = torch.abs(image_generated[:, :, :, 1:] - image_generated[:, :, :, :-1])
-        
-        tv_loss = torch.sum(horizontal_diff) + torch.sum(vertical_diff)
-        
-        return tv_loss
