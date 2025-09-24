@@ -99,7 +99,7 @@ class Dataset(Dataset):
 if __name__ == "__main__":
     
     arg = configargparse.ArgumentParser()
-    arg.add_argument('--dataset_path', type=str, default=r'../OpenCV contest/dataset;D:\Fotos;D:\Mis Cosas;D:\Osprean', help='Dataset paths.')
+    arg.add_argument('--dataset_path', type=str, default=r'dataset;D:\Pictures', help='Dataset paths.')
     arg.add_argument('--train_split', type=float, default=0.85, help='Percentage of the dataset to use for training.')
     arg.add_argument('--min_width', type=int, default=300, help='Minimum width for the images to include inthe dataset.')
     arg.add_argument('--min_height', type=int, default=300, help='Minimum height for the images to include inthe dataset.')
@@ -111,10 +111,6 @@ if __name__ == "__main__":
     for path in paths:
         
         for root, dirs, files in os.walk(path):
-            
-            if os.path.normpath(path) == os.path.normpath("../OpenCV contest/dataset"):
-                if os.path.basename(root) != "image_left":
-                    continue
 
             for file in files:
                 
@@ -156,10 +152,10 @@ if __name__ == "__main__":
     train_paths = image_paths[:train_size]
     val_paths = image_paths[train_size:]
 
-    with open("train_paths_augmented.json", 'w') as f:
+    with open("images_paths_training.json", 'w') as f:
         json.dump(train_paths, f, indent=4)
 
-    with open("val_paths_augmented.json", 'w') as f:
+    with open("images_paths_validation.json", 'w') as f:
         json.dump(val_paths, f, indent=4)
 
     print(f"Total images: {total}")
