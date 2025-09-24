@@ -227,9 +227,9 @@ if __name__ == "__main__":
     
     # Select parameters for training
     arg = configargparse.ArgumentParser()
-    arg.add_argument('--json_file_train_path', type=str, default='train_paths_augmented.json', help='Train dataset file path.')
-    arg.add_argument('--json_file_val_path', type=str, default='val_paths_augmented.json', help='Validation dataset file path.')
-    arg.add_argument('--log_dir', type=str, default='deblurGAN_augmented_2', help='Name of the folder to save the model.')
+    arg.add_argument('--json_file_train_path', type=str, default='images_paths_training.json', help='Train dataset file path.')
+    arg.add_argument('--json_file_val_path', type=str, default='images_paths_validation.json', help='Validation dataset file path.')
+    arg.add_argument('--log_dir', type=str, default='deblurGAN', help='Name of the folder to save the model.')
     arg.add_argument('--batch_size', type=int, default=1, help='Batch size.')
     arg.add_argument('--num_workers', type=int, default=6, help='Number of threads to use in order to load the dataset.')
     arg.add_argument('--num_resblocks', type=int, default=9, help='Number of residual blocks for the generator.')
@@ -277,4 +277,3 @@ if __name__ == "__main__":
     
     # Train the model
     train()
-
