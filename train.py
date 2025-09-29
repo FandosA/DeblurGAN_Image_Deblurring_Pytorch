@@ -232,7 +232,7 @@ if __name__ == "__main__":
     arg.add_argument('--GPU', type=bool, default=True, help='True to run the model in the GPU.')
     args = arg.parse_args()
     
-    log_dir_path = args.log_dir + "_bs" + str(args.batch_size) + "_lr" + str(args.learning_rate) + "_numresblocks" + str(args.num_resblocks)
+    log_dir_path = args.log_dir + "_bs" + str(args.batch_size) + "_lr" + str(args.learning_rate) + "_numresblocks" + str(args.num_resblocks) + "_lambdaG" + str(args.lambda_generator) + "_lambdaD" + str(args.lambda_discriminator)
     assert not (os.path.isdir(log_dir_path)), 'The folder log_dir already exists, remove it or change its name'
     
     # Create folder to store checkpoints and training and validation losses and accuracies
@@ -268,3 +268,4 @@ if __name__ == "__main__":
     
     # Train the model
     train()
+
