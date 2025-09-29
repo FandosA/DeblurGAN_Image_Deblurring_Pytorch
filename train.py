@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Jan 16 10:26:05 2025
-
-@author: fandos
-"""
-
 import os
 import torch
 import numpy as np
@@ -12,7 +5,7 @@ import configargparse
 from loss import GeneratorLoss, DiscriminatorLossWGANGP
 from dataset_augmented import Dataset
 from model import DeblurGAN, Discriminator
-from utils import selectDevice, calculateAccuracy#, plotLoss, plotAccuracy
+from utils import selectDevice, calculateAccuracy
 from torch.utils.data import DataLoader
 
 
@@ -26,8 +19,6 @@ def updateLearningRate(arguments, old_lr):
         
     for param_group in optimizer_g.param_groups:
         param_group['lr'] = new_lr
-        
-    print('Update learning rate: %f -> %f' % (old_lr, new_lr))
     
     return new_lr
 
