@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Jan 16 15:22:22 2025
-
-@author: fandos
-"""
-
 import torch
 import torch.nn as nn
 from torch.autograd import grad
