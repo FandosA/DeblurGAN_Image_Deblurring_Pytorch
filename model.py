@@ -1,3 +1,6 @@
+import torch
+import torch.nn as nn
+
 def weights_init(m):
     
     classname = m.__class__.__name__
@@ -151,3 +154,4 @@ class Discriminator(nn.Module):
         out = self.conv5(x)
         
         return out
+
