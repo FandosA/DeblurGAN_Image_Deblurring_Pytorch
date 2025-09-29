@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Jan 16 10:26:05 2025
-
-@author: fandos
-"""
-
 import os
 import cv2
 import torch
@@ -55,16 +48,9 @@ if __name__ == "__main__":
             blurred_image_deblurred = generator(image_blurred_tensor)
             blurred_image_deblurred = tensorToImage(blurred_image_deblurred)
             
-            image_original_tensor = imageToTensor(image_original)
-            image_original_tensor = torch.unsqueeze(image_original_tensor, dim=0).to(device)
-            image_original_deblurred = generator(image_original_tensor)
-            image_original_deblurred = tensorToImage(image_original_deblurred)
-            
-            #cv2.imwrite(os.path.join(args.dataset_path, "deblurred", os.path.basename(image_test)), blurred_image_deblurred)
-            
             cv2.imshow('Original Image', image_original)
             cv2.imshow('Blurred Image', image_blurred)
-            cv2.imshow('Original Image Deblurred', image_original_deblurred)
-            cv2.imshow('Blurred Image Deblurred', blurred_image_deblurred)
+            cv2.imshow('Image Deblurred', blurred_image_deblurred)
             cv2.waitKey(0)
+
             cv2.destroyAllWindows()
