@@ -88,7 +88,7 @@ def train():
                 train_acc_d_temp += (real_accuracy + fake_accuracy).item() / 2
                 train_loss_d_temp += loss_d.item()
                 
-            train_acc_d += (train_accs_d / 5.0)
+            train_acc_d += (train_acc_d_temp / 5.0)
             train_loss_d += (train_loss_d_temp / 5.0)
             
             """
@@ -268,4 +268,5 @@ if __name__ == "__main__":
     
     # Train the model
     train()
+
 
