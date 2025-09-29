@@ -17,4 +17,16 @@ To train the model, you can adjust the parameters and hyperparameters as needed.
 ```
 python train.py
 ```
-When the training starts, a folder is created. The folder name consists of the name provided in the parameters, followed by relevant training parameter information, such as the batch size, learning rate and the number of residual blocks added to the network. This way, you can always identify the parameter values used for the training. In my case, the name of my training folder is ```deblurGAN_bs1_lr0.0001_numresblocks9/```. Five txt files are stored in this folder, containing the values of the generator loss and the discriminator accuracy at each epoch. Additionally, within this folder, a subfolder called ```checkpoints/``` is created to store the model every 10 epochs. I am providing the generator model I trained, along with my txt files containing the loss and accuracy values.
+When the training starts, a folder is created. The folder name consists of the name provided in the parameters, followed by relevant training parameter information, such as the batch size, learning rate and the number of residual blocks added to the network. This way, you can always identify the parameter values used for the training. In my case, the name of my training folder is ```deblurGAN_bs1_lr0.0001_numresblocks9_lambdaG100_lambdaD10/```. Five txt files are stored in this folder, containing the values of the generator loss and the discriminator accuracy at each epoch. Additionally, within this folder, a subfolder called ```checkpoints/``` is created to store the model every 10 epochs. I am providing the generator model I trained, along with my txt files containing the loss and accuracy values.
+
+## Test the model
+To test the model, specify the checkpoint to be evaluated in the parameters, along with the name of the folder containing the model file. Place the images you want to deblur in the `test_images/original/` folder and run:
+```
+python test_images.py
+```
+The resulting deblurred images will be saved in the `test_images/deblurred/` folder. As an example, you can check the folder included in this repository, which contains an image I deblurred.
+
+The same process applies to videos by running:
+```
+python test_videos.py
+```
