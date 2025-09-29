@@ -11,3 +11,6 @@ To prepare the dataset, you should first run the file `dataset.py`, setting the 
 - **min_width** and **min_height**: these two parameters set the minimum width and height of the images to be taken into account. All images with smaller dimensions will be discarded.
 
 The script lists all image paths in the given folders that meet the size requirements, shuffles them randomly, and then splits them into training and validation sets according to the **train_split** parameter. Finally, two _JSON_ files will be generated: one containing the training image paths and the other containing the validation image paths. These _JSON_ files will be used during training to load the images.
+
+## Train the model
+To train the model, you can adjust the parameters and hyperparameters as needed. In my experiments, I used the same values as in the original paper, but I implemented a different approach to blur the images. Specifically, I use the [OpenCV](https://opencv.org/) function [GaussianBlur](https://docs.opencv.org/4.x/d4/d86/group__imgproc__filter.html#gae8bdcd9154ed5ca3cbc1766d960f45c1), selecting a random kernel size (3, 5, or 7) and a random sigma value (between 2.0 and 9.0) each time an image is loaded. This introduces variability, allowing the model to learn to generalize better, since the same image can appear with different levels of blur at each iteration.
