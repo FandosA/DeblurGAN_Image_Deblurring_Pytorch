@@ -20,7 +20,7 @@ class Dataset(Dataset):
         
         if train:
             self.transformer = transforms.Compose([
-                transforms.RandomCrop((256, 256)),
+                transforms.RandomCrop((224, 224)),
                 transforms.RandomHorizontalFlip(p=0.5),
                 transforms.RandomVerticalFlip(p=0.5),
                 transforms.ColorJitter(brightness=0.2, contrast=0.2),
@@ -29,7 +29,10 @@ class Dataset(Dataset):
             with open(args.json_file_train_path, "r") as file:
                 self.images_paths = json.load(file)
         else:
-            self.transformer = transforms.ToTensor()
+            self.transformer = transforms.Compose([
+                transforms.CenterCrop(300),
+                transforms.ToTensor(),
+            ])
             with open(args.json_file_val_path, "r") as file:
                 self.images_paths = json.load(file)
         
@@ -146,3 +149,4 @@ if __name__ == "__main__":
     print(f"Total images: {total}")
     print(f"Train images: {len(train_paths)}")
     print(f"Validation images: {len(val_paths)}")
+
