@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Jan 16 10:18:28 2025
-
-@author: fandos
-"""
-
 import os
 import cv2
 import json
@@ -32,16 +25,10 @@ class Dataset(Dataset):
                 transforms.RandomVerticalFlip(p=0.5),
                 transforms.ColorJitter(brightness=0.2, contrast=0.2),
                 transforms.ToTensor(),
-                #transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
             ])
             with open(args.json_file_train_path, "r") as file:
                 self.images_paths = json.load(file)
         else:
-            # self.transformer = transforms.Compose([
-                # transforms.CenterCrop(300),
-                # transforms.ToTensor(),
-                # transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
-            # ])
             self.transformer = transforms.ToTensor()
             with open(args.json_file_val_path, "r") as file:
                 self.images_paths = json.load(file)
@@ -131,11 +118,9 @@ if __name__ == "__main__":
                     try:
                         img_pil = Image.open(full_path)
                         
-                        # Si tiene varios frames, quedarse con el primero
                         if hasattr(img_pil, "n_frames") and img_pil.n_frames > 1:
                             img_pil.seek(0)
                                 
-                        # Convertir a RGB y luego a array NumPy
                         img_rgb = np.array(img_pil.convert("RGB"))
                         
                         h, w = img_rgb.shape[:2]
@@ -161,3 +146,4 @@ if __name__ == "__main__":
     print(f"Total images: {total}")
     print(f"Train images: {len(train_paths)}")
     print(f"Validation images: {len(val_paths)}")
+
