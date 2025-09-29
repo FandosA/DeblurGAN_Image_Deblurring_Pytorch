@@ -146,4 +146,3 @@ if __name__ == "__main__":
     print(f"Total images: {total}")
     print(f"Train images: {len(train_paths)}")
     print(f"Validation images: {len(val_paths)}")
-
