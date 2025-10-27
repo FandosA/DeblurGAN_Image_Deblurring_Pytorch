@@ -225,8 +225,8 @@ if __name__ == "__main__":
     arg.add_argument('--num_workers', type=int, default=6, help='Number of threads to use in order to load the dataset.')
     arg.add_argument('--num_resblocks', type=int, default=9, help='Number of residual blocks for the generator.')
     arg.add_argument('--learning_rate', type=float, default=1e-4, help='Learning rate.')
-    arg.add_argument('--num_iters', type=int, default=150, help='Number of epochs with the same learning rate.')
-    arg.add_argument('--num_iters_decay', type=int, default=150, help='Epoch number to start decreasing the learning rate.')
+    arg.add_argument('--num_iters', type=int, default=40, help='Number of epochs with the same learning rate.')
+    arg.add_argument('--num_iters_decay', type=int, default=260, help='Epoch number to start decreasing the learning rate.')
     arg.add_argument('--lambda_generator', type=float, default=100, help='Weighting parameter in the generator for the perceptual loss.')
     arg.add_argument('--lambda_discriminator', type=float, default=10, help='Weighting parameter for the gradient penalty in the discriminator loss.')
     arg.add_argument('--GPU', type=bool, default=True, help='True to run the model in the GPU.')
@@ -268,5 +268,3 @@ if __name__ == "__main__":
     
     # Train the model
     train()
-
-
