@@ -57,7 +57,7 @@ class Dataset(Dataset):
 if __name__ == "__main__":
     
     arg = configargparse.ArgumentParser()
-    arg.add_argument('--dataset_path', type=str, default=r'dataset;D:\Pictures', help='Dataset paths.')
+    arg.add_argument('--dataset_path', type=str, default=r'dataset', help='Dataset paths.')
     arg.add_argument('--train_split', type=float, default=0.9, help='Percentage of the dataset to use for training.')
     args = arg.parse_args()
 
@@ -91,4 +91,5 @@ if __name__ == "__main__":
     print(f"Total images: {total}")
     print(f"Train images: {len(train_paths)}")
     print(f"Validation images: {len(val_paths)}")
+
 
