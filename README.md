@@ -22,9 +22,4 @@ To test the model, specify the checkpoint to be evaluated in the parameters, alo
 ```
 python test_images.py
 ```
-The resulting deblurred images will be saved in the `test_images/deblurred/` folder. As an example, you can check the folder included in this repository, which contains an image I deblurred.
-
-The same process applies to videos by running:
-```
-python test_videos.py
-```
+Three new windows will appear for each image: one showing the original image, another showing the blurred version, and finally a third showing the deblurred image. This allows you to compare the original image with the model’s deblurred result.
