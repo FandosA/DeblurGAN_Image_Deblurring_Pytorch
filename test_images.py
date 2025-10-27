@@ -40,7 +40,7 @@ if __name__ == "__main__":
             image_original = cv2.imread(image_test)
             
             kernel_size = random.choice([3, 5, 7])  # debe ser impar
-            sigma = random.uniform(1.0, 7.0)
+            sigma = random.uniform(5.0, 7.0)
             image_blurred = cv2.GaussianBlur(image_original, (kernel_size, kernel_size), sigmaX=sigma)
             
             image_blurred_tensor = imageToTensor(image_blurred)
@@ -54,4 +54,5 @@ if __name__ == "__main__":
             cv2.waitKey(0)
 
             cv2.destroyAllWindows()
+
 
