@@ -60,6 +60,8 @@ if __name__ == "__main__":
     arg.add_argument('--dataset_path', type=str, default=r'dataset;D:\Pictures', help='Dataset paths.')
     arg.add_argument('--train_split', type=float, default=0.9, help='Percentage of the dataset to use for training.')
     args = arg.parse_args()
+
+    assert 0 < args.train_split < 1, "--train_split must be a number between 0 y 1 (exclusive)"
     
     paths = args.dataset_path.split(";")
     image_paths = []
@@ -89,3 +91,4 @@ if __name__ == "__main__":
     print(f"Total images: {total}")
     print(f"Train images: {len(train_paths)}")
     print(f"Validation images: {len(val_paths)}")
+
