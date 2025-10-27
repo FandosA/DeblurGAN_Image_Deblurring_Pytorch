@@ -12,7 +12,7 @@ if __name__ == "__main__":
     # Select parameters for testing
     arg = configargparse.ArgumentParser()
     arg.add_argument('--dataset_path', type=str, default='test_images', help='Dataset path.')
-    arg.add_argument('--log_dir', type=str, default='deblurGAN_augmented_bs1_lr0.0001_numresblocks9', help='Name of the folder where the files of checkpoints and precision and loss values are stored.')
+    arg.add_argument('--log_dir', type=str, default='deblurGAN_bs1_lr0.0001_numresblocks9_lambdaG100_lambdaD10', help='Name of the folder where the files of checkpoints and precision and loss values are stored.')
     arg.add_argument('--checkpoint', type=str, default='checkpoint_67_best_g.pth',help='Checkpoint to use')
     arg.add_argument('--num_resblocks', type=int, default=9, help='Number of residual blocks for the generator.')
     arg.add_argument('--GPU', type=bool, default=True, help='True to train the model in the GPU.')
@@ -54,5 +54,6 @@ if __name__ == "__main__":
             cv2.waitKey(0)
 
             cv2.destroyAllWindows()
+
 
 
