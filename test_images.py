@@ -1,7 +1,6 @@
 import os
 import cv2
 import torch
-import random
 import configargparse
 from model import DeblurGAN
 from utils import selectDevice, tensorToImage, imageToTensor
@@ -54,6 +53,7 @@ if __name__ == "__main__":
             cv2.waitKey(0)
 
             cv2.destroyAllWindows()
+
 
 
 
