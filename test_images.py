@@ -38,8 +38,8 @@ if __name__ == "__main__":
             
             image_original = cv2.imread(image_test)
             
-            kernel_size = random.choice([3, 5, 7])  # debe ser impar
-            sigma = random.uniform(5.0, 7.0)
+            kernel_size = 5
+            sigma = 5.0
             image_blurred = cv2.GaussianBlur(image_original, (kernel_size, kernel_size), sigmaX=sigma)
             
             image_blurred_tensor = imageToTensor(image_blurred)
@@ -47,13 +47,9 @@ if __name__ == "__main__":
             blurred_image_deblurred = generator(image_blurred_tensor)
             blurred_image_deblurred = tensorToImage(blurred_image_deblurred)
             
-            cv2.imshow('Original Image', image_original)
-            cv2.imshow('Blurred Image', image_blurred)
-            cv2.imshow('Image Deblurred', blurred_image_deblurred)
-            cv2.waitKey(0)
-
-            cv2.destroyAllWindows()
-
-
-
-
+            filename = os.path.basename(image_test)
+            blurred_path = os.path.join('test_images', 'blurred', filename)
+            deblurred_path = os.path.join('test_images', 'deblurred', filename)
+            
+            cv2.imwrite(blurred_path, image_blurred)
+            cv2.imwrite(deblurred_path, blurred_image_deblurred)
