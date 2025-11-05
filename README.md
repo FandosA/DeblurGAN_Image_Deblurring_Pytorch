@@ -22,4 +22,4 @@ To test the model, specify the checkpoint to be evaluated in the parameters, alo
 ```
 python test_images.py
 ```
-Three new windows will appear for each image: one showing the original image, another showing the blurred version, and finally a third showing the deblurred image. This allows you to compare the original image with the model’s deblurred result.
+The Gaussian-blurred images and the model-deblurred ones are saved in the ```test_images/blurred/``` and ```test_images/deblurred/``` folders, respectively. I’ve uploaded an example image to this repository, which you can also see below. The image corresponds to a screenshot from the video game Assassin’s Creed Valhalla.
