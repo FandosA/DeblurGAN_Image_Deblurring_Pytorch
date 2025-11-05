@@ -47,9 +47,5 @@ if __name__ == "__main__":
             blurred_image_deblurred = generator(image_blurred_tensor)
             blurred_image_deblurred = tensorToImage(blurred_image_deblurred)
             
-            filename = os.path.basename(image_test)
-            blurred_path = os.path.join('test_images', 'blurred', filename)
-            deblurred_path = os.path.join('test_images', 'deblurred', filename)
-            
-            cv2.imwrite(blurred_path, image_blurred)
-            cv2.imwrite(deblurred_path, blurred_image_deblurred)
+            cv2.imwrite(os.path.join('test_images', 'blurred', os.path.basename(image_test)), image_blurred)
+            cv2.imwrite(os.path.join('test_images', 'deblurred', os.path.basename(image_test)), blurred_image_deblurred)
