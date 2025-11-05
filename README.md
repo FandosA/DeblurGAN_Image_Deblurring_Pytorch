@@ -25,4 +25,10 @@ python test_images.py
 The Gaussian-blurred images and the model-deblurred ones are saved in the ```test_images/blurred/``` and ```test_images/deblurred/``` folders, respectively. I’ve uploaded an example image to this repository, which you can also see below. The image corresponds to a screenshot from the video game **Assassin’s Creed Valhalla**.
 
 ### Original image
-![Original image](test_images/Assassins_creed.jpg)
+![Original image](test_images/original/Assassins_creed.jpg)
+
+### Blurred image
+![Original image](test_images/blurred/Assassins_creed.jpg)
+
+### Deblurred image
+![Original image](test_images/deblurred/Assassins_creed.jpg)
