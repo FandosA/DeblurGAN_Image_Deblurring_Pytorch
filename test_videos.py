@@ -85,15 +85,8 @@ if __name__ == "__main__":
                 out_video_blurred.write(frame_blurred)
                 out_video_deblurred.write(out_image)
     
-                # cv2.imshow("Original", frame)
-                # cv2.imshow("Blurred", frame_blurred)
-                # cv2.imshow("Deblurred", out_image)
-    
-                # key = cv2.waitKey(10)
-                # if key == 27:
-                #     break
-    
             cap.release()
             out_video_blurred.release()
             out_video_deblurred.release()
+
             cv2.destroyAllWindows()
