@@ -22,7 +22,15 @@ To test the model, specify the checkpoint to be evaluated in the parameters, alo
 ```
 python test_images.py
 ```
-The Gaussian-blurred images and the model-deblurred ones are saved in the ```test_images/blurred/``` and ```test_images/deblurred/``` folders, respectively. I’ve uploaded an example image to this repository, which you can also see below. The image corresponds to a screenshot from the video game **Assassin’s Creed Valhalla**.
+The Gaussian-blurred images and the model-deblurred ones are saved in the ```test_images/blurred/``` and ```test_images/deblurred/``` folders, respectively, with the same file name. I’ve uploaded an example image to this repository, which you can also see below. The image corresponds to a screenshot from the video game **Assassin’s Creed Valhalla**.
+
+The same process used for images can also be applied to videos. You can place some video files in the ```test_videos/original/``` folder, and run
+```
+python test_videos.py
+```
+This will generate the blurred and deblurred versions of the videos in the ```test_videos/blurred/``` and ```test_videos/deblurred/``` folders, respectively, using the same file names.
+
+NOTE: the files in these folders are not real video files — they are just empty placeholders to illustrate the expected structure.
 
 ### Original image
 ![Original image](test_images/original/Assassins_creed.jpg)
