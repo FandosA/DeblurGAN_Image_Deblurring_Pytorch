@@ -50,6 +50,7 @@ if __name__ == "__main__":
     
             fps = cap.get(cv2.CAP_PROP_FPS)
             total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+            video_name = os.path.splitext(os.path.basename(video_path))[0]
     
             # Read first frame to get resolution of the video
             ret, frame = cap.read()
@@ -62,12 +63,10 @@ if __name__ == "__main__":
             # Reset video to the first frame
             cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
     
-            output_name_blurred = os.path.splitext(os.path.basename(video_path))[0] + "_blurred.mp4"
-            output_path_blurred = os.path.join(output_dir_blurred, output_name_blurred)
+            output_path_blurred = os.path.join(output_dir_blurred, video_name)
             out_video_blurred = cv2.VideoWriter(output_path_blurred, fourcc, fps, (width, height))
-    
-            output_name_deblurred = os.path.splitext(os.path.basename(video_path))[0] + "_deblurred.mp4"
-            output_path_deblurred = os.path.join(output_dir_deblurred, output_name_deblurred)
+            
+            output_path_deblurred = os.path.join(output_dir_deblurred, video_name)
             out_video_deblurred = cv2.VideoWriter(output_path_deblurred, fourcc, fps, (width, height))
     
             for _ in range(total_frames):
@@ -88,3 +87,4 @@ if __name__ == "__main__":
             cap.release()
             out_video_blurred.release()
             out_video_deblurred.release()
+
