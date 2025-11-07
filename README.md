@@ -30,7 +30,7 @@ python test_videos.py
 ```
 This will generate the blurred and deblurred versions of the videos in the ```test_videos/blurred/``` and ```test_videos/deblurred/``` folders, respectively, using the same file names.
 
-NOTE: the files in these folders are not real video files, they are just empty placeholders to illustrate the expected structure.
+NOTE: the files in these folders are not real video files, they are just empty placeholders to illustrate the expected structure. Similarly, the files in the ```checkpoints/``` folder are not real model files and are also empty placeholders for demonstration purposes.
 
 ### Original image
 ![Original image](test_images/original/Assassins_creed.jpg)
