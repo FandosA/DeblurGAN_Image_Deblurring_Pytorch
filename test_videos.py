@@ -88,5 +88,3 @@ if __name__ == "__main__":
             cap.release()
             out_video_blurred.release()
             out_video_deblurred.release()
-
-            cv2.destroyAllWindows()
