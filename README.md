@@ -30,6 +30,8 @@ python test_videos.py
 ```
 This will generate the blurred and deblurred versions of the videos in the ```test_videos/blurred/``` and ```test_videos/deblurred/``` folders, respectively, using the same file names.
 
+You can check the following video to see the result of the model after processing a fragment from the video game Red Dead Redemption: https://www.youtube.com/watch?v=22fwREg7PO4
+
 NOTE: the files in these folders are not real video files, they are just empty placeholders to illustrate the expected structure. Similarly, the files in the ```checkpoints/``` folder are not real model files and are also empty placeholders for demonstration purposes.
 
 ### Original image
