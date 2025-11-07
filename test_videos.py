@@ -50,7 +50,7 @@ if __name__ == "__main__":
     
             fps = cap.get(cv2.CAP_PROP_FPS)
             total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-            video_name = os.path.splitext(os.path.basename(video_path))[0]
+            video_name = os.path.splitext(os.path.basename(video_path))[0] + ".mp4"
     
             # Read first frame to get resolution of the video
             ret, frame = cap.read()
@@ -87,4 +87,5 @@ if __name__ == "__main__":
             cap.release()
             out_video_blurred.release()
             out_video_deblurred.release()
+
 
